@@ -2,37 +2,31 @@
 var express = require("express");
 var exphbs = require("express-handlebars");
 
-// Requiring our models for syncing
-var db = require("./models");
-
-// setup express app
+// setup the express app
 var app = express();
 var PORT = process.env.PORT || 8080;
 
-// setup to use handlebars
-app.engine("handlebars", exphbs({
-    defaultLayout: "main"
-}));
-app.set("view engine", "handlebars");
+// require models for syncing
+var db = require("./models");
 
 // configure middleware
-app.use(express.urlencoded({
-    extended: true
-}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Static directory
+// define static directory
 app.use(express.static("public"));
 
-// routes 
+// setup handelbars
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+// routes
 require("./routes/api-routes.js")(app);
 require("./routes/view-routes.js")(app);
 
-// Syncing our sequelize models and then starting our Express app
-db.sequelize.sync({
-    force: true
-}).then(function () {
-    app.listen(PORT, function () {
-        console.log("Server listening on: http://localhost:" + PORT);
-    });
+// start the server
+db.sequelize.sync({ force: true }).then(function () {
+  app.listen(PORT, function () {
+    console.log("App listening at http://localhost:" + PORT);
+  });
 });
