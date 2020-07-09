@@ -11,7 +11,9 @@ var PORT = process.env.PORT || 3000;
 var db = require("./models");
 
 // Setup middleware
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({
+  extended: true
+}));
 app.use(express.json());
 app.use("/api", noteApi);
 
@@ -19,7 +21,9 @@ app.use("/api", noteApi);
 app.use(express.static("public"));
 
 // Setup Handlebars
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine("handlebars", exphbs({
+  defaultLayout: "main"
+}));
 app.set("view engine", "handlebars");
 
 // Import routes
