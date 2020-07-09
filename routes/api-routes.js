@@ -6,7 +6,7 @@ module.exports = function (app) {
   //Establish a GET route
   app.get("/codeLibrary", function (req, res) {
     //Get all existing entries from database
-    db.CodeResource.findAll({}).then(function (result) {
+    db.CodeResource.findAll().then(function (result) {
       res.json(result);
       console.log(result);
     });

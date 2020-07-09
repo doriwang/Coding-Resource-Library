@@ -32,9 +32,7 @@ require("./routes/view-routes.js")(app);
 require("./routes/todo-api-routes")(app);
 
 // Start up the server
-db.sequelize.sync({
-  force: false
-}).then(function () {
+db.sequelize.sync({ force: false }).then(function () {
   app.listen(PORT, function () {
     console.log("App listening at http://localhost:" + PORT);
   });
