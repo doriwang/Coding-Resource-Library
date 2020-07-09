@@ -1,10 +1,34 @@
 /* coding resource style */
-.navbar {
-    height: 80px
+body {
+    color: dimgray
 }
 
-.navbar-brand {
-    padding-left: 30px
+.nav-main {
+    height: 100px;
+    background-image: linear-gradient(to right, lightskyblue, palegreen, orange, plum);
+}
+
+.navbar-icons {
+    display: inline-block;
+    position: absolute;
+}
+
+.nav-brand-main {
+    padding-left: 180px;
+    font-size: 24px
+}
+
+.navbar-nav {
+    font-size: 24px
+}
+
+.search-row,
+.note-nav {
+    margin-top: 100px
+}
+
+.todo-row {
+    margin-top: 30px
 }
 
 /* todo page style */
@@ -45,6 +69,7 @@ body {
     margin-right: 15px;
     font-size: 1.5rem;
     cursor: pointer;
+    color: dimgray
 }
 
 .note-textarea,

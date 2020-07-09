@@ -11,7 +11,9 @@ var PORT = process.env.PORT || 3000;
 var db = require("./models");
 
 // Setup middleware
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({
+  extended: true
+}));
 app.use(express.json());
 app.use("/api", noteApi);
 
@@ -19,7 +21,9 @@ app.use("/api", noteApi);
 app.use(express.static("public"));
 
 // Setup Handlebars
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine("handlebars", exphbs({
+  defaultLayout: "main"
+}));
 app.set("view engine", "handlebars");
 
 // Import routes
@@ -28,7 +32,9 @@ require("./routes/view-routes.js")(app);
 require("./routes/todo-api-routes")(app);
 
 // Start up the server
-db.sequelize.sync({ force: true }).then(function () {
+db.sequelize.sync({
+  force: false
+}).then(function () {
   app.listen(PORT, function () {
     console.log("App listening at http://localhost:" + PORT);
   });
