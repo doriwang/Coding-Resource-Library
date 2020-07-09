@@ -1,30 +1,30 @@
-// import dependencies
+// Import Express and Handlebars dependencies
 var express = require("express");
 var exphbs = require("express-handlebars");
 
-// setup the express app
+// Define Express and PORT variables
 var app = express();
-var PORT = process.env.PORT || 8080;
+var PORT = process.env.PORT || 3000;
 
-// require models for syncing
+// require models for syncing with Database
 var db = require("./models");
 
-// configure middleware
+// Setup middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// define static directory
+// Define a static directory
 app.use(express.static("public"));
 
-// setup handelbars
+// Setup Handlebars
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-// routes
+// Import routes
 require("./routes/api-routes.js")(app);
 require("./routes/view-routes.js")(app);
 
-// start the server
+// Start up the server
 db.sequelize.sync({ force: true }).then(function () {
   app.listen(PORT, function () {
     console.log("App listening at http://localhost:" + PORT);
