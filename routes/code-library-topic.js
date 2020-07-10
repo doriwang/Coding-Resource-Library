@@ -7,7 +7,12 @@ var searchTopics = require("../tools/searchTopics")
 module.exports = function (app) {
   //Establish a GET route
     app.get("/codeLibrary/topics/", function (req, res) {
-        
-        searchTopics(req.body)
+        console.log("req:", req.query.topic);
+        searchTopics(req.query.topic, function(result) {
+            
+            // res.render("index", result)
+            // or
+            res.json(result);
+        })
         });
  };

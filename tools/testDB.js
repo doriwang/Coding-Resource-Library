@@ -1,5 +1,6 @@
 // Requiring our models for syncing
-var db = require("./models");
+var db = require("../models");
+
 
 const { Op } = require("sequelize");
 
@@ -36,10 +37,21 @@ db.sequelize.sync().then(function () {
   });
 
   // search by keyword "WEB" and "API"
+  var keyWords = ["WEB","API"];
+  var searchArr = [];
+  for (var i = 0; i < keyWords.length; i++) {
+    var obj = {
+      [Op.substring]:keyWords[i]
+    };
+    searchArr.push(obj);
+}
+
   db.CodeResource.findAll({
     where: {
       topic: {
-        [Op.and]: [{ [Op.substring]: "WEB" }, { [Op.substring]: "API" }],
+        [Op.and]: searchArr
+
+        // [Op.and]: [{ [Op.substring]: "WEB" }, { [Op.substring]: "API" }],
       },
     },
   }).then(function (result) {
