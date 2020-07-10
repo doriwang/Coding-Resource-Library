@@ -30,6 +30,7 @@ app.set("view engine", "handlebars");
 require("./routes/api-routes.js")(app);
 require("./routes/view-routes.js")(app);
 require("./routes/todo-api-routes")(app);
+require("./routes/code-library-topic.js")(app);
 
 // Start up the server
 db.sequelize.sync({ force: false }).then(function () {
