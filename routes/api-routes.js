@@ -8,7 +8,6 @@ module.exports = function (app) {
     //Get all existing entries from database
     db.CodeResource.findAll().then(function (result) {
       res.json(result);
-      console.log(result);
     });
   });
 
