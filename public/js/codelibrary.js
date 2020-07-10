@@ -68,57 +68,28 @@ $(function () {
       url: "/codeLibrary",
     })
       .then((library) => {
-        console.log(library);
-
         library.forEach((entry) => {
-          console.log(entry);
+          var entryCol = $("<div>").addClass(
+            "card index-card col-sm-12 col-lg-6"
+          );
+          var category = $("<p>").text("Category: " + entry.category);
+          var topic = $("<p>").text("Topic: " + entry.topic);
+          var comments = $("<p>").text("Comments: " + entry.comments);
+          var url = $("<a>")
+            .attr("href", entry.url)
+            .attr("target", "_blank")
+            .text("Click Here to View Resource");
 
-          const { category, topic, url, comments } = entry;
-
-          const list = `
-          <ul class="list-group list-group-horizontal-md">
-          <li class="list-group-item">${category}</li>
-          <li class="list-group-item">${topic}</li>
-          <li class="list-group-item">${url}</li>
-          <li class="list-group-item">${comments}</li>
-        </ul>
-                `;
-          console.log(list);
-
-          $("#libraryEntries").append(list);
+          $("#libraryEntries").append(
+            entryCol.prepend(category, topic, comments, url)
+          );
         });
       })
       .catch((err) => console.log(err));
   };
 
-  const getCategory = () => {
-    $.ajax({
-      method: "GET",
-      url: "/category",
-    })
-      .then((library) => {
-        console.log(library);
-
-        library.forEach((entry) => {
-          console.log(entry);
-
-          const { category, topic, url, comments } = entry;
-
-          const list = `
-          <ul class="list-group list-group-horizontal-md">
-          <li class="list-group-item">${category}</li>
-          <li class="list-group-item">${topic}</li>
-          <li class="list-group-item">${url}</li>
-          <li class="list-group-item">${comments}</li>
-        </ul>
-                `;
-          console.log(list);
-
-          $("#libraryEntries").append(list);
-        });
-      })
-      .catch((err) => console.log(err));
-  };
+  // Gets all entries from library and displays to the page
+  getLibrary();
 
   //Grabs the selection choice of user from category dropdown
   $("#select-categories").on("change", (event) => {
@@ -136,25 +107,24 @@ $(function () {
           $("#libraryEntries").empty();
 
           library.forEach((entry) => {
-            const { category, topic, url, comments } = entry;
+            var entryCol = $("<div>").addClass(
+              "card index-card col-sm-12 col-lg-6"
+            );
+            var category = $("<p>").text("Category: " + entry.category);
+            var topic = $("<p>").text("Topic: " + entry.topic);
+            var comments = $("<p>").text("Comments: " + entry.comments);
+            var url = $("<a>")
+              .attr("href", entry.url)
+              .attr("target", "_blank")
+              .text("Click Here to View Resource");
 
-            const list = `
-          <ul class="list-group list-group-horizontal-md">
-          <li class="list-group-item">${category}</li>
-          <li class="list-group-item">${topic}</li>
-          <li class="list-group-item">${url}</li>
-          <li class="list-group-item">${comments}</li>
-        </ul>
-                `;
-
-            $("#libraryEntries").append(list);
+            $("#libraryEntries").append(
+              entryCol.prepend(category, topic, comments, url)
+            );
           });
         })
         .catch((err) => console.log(err));
     };
     getCategory(category);
   });
-
-  // Gets all entries from library and displays to the page
-  getLibrary();
 });
