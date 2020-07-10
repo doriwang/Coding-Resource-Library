@@ -1,31 +1,18 @@
 $(function () {
-  let topic = "";
-  let url = "";
-  let comments = "";
-
   const getLibrary = () => {
     $.ajax({
-      method: "GET",
-      url: "/codeLibrary",
-    })
-      .then((library) => {
-        console.log(library);
+        method: "GET",
+        url: "/codeLibrary",
+      })
+      .then(library => {
+        library.forEach(entry => {
+          var entryCol = $("<div>").addClass("card index-card col-sm-12 col-lg-6");
+          var category = $("<p>").text("Category: " + entry.category);
+          var topic = $("<p>").text("Topic: " + entry.topic)
+          var comments = $("<p>").text("Comments: " + entry.comments)
+          var url = $("<a>").attr("href", entry.url).attr("target", "_blank").text("Click Here to View Resource")
 
-        library.forEach((entry) => {
-          console.log(entry);
-
-          const { topic, url, comments } = entry;
-
-          const list = `
-          <ul class="list-group list-group-horizontal-md">
-          <li class="list-group-item">${topic}</li>
-          <li class="list-group-item">${url}</li>
-          <li class="list-group-item">${comments}</li>
-        </ul>
-                `;
-          console.log(list);
-
-          $("#libraryEntries").append(list);
+          $("#libraryEntries").append(entryCol.prepend(category, topic, comments, url))
         });
       })
       .catch((err) => console.log(err));
