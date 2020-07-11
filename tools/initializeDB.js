@@ -48,7 +48,7 @@ var initialData = [
   },
   {
     category: "CSS",
-    topic: "What is a great recource to learn about CSS?",
+    topic: "What is a great resource to learn about CSS?",
     url: "https://css-tricks.com/",
     comments: "a great resource to learn about CSS",
   },
@@ -60,7 +60,7 @@ var initialData = [
   },
   {
     category: "HTML",
-    topic: "A greate Markup language validator.",
+    topic: "A great Markup language validator.",
     url: "https://validator.w3.org/",
     comments: "markup validation service",
   },
@@ -78,7 +78,7 @@ var initialData = [
   },
   {
     category: "JavaScript",
-    topic: "Bacis JavaScript functions",
+    topic: "Basic JavaScript functions",
     url:
       "https://codeburst.io/javascript-functions-understanding-the-basics-207dbf42ed99",
     comments: "a great resource to understand basic JavaScript functions",
@@ -120,7 +120,7 @@ var initialData = [
   },
   {
     category: "jQuery",
-    topic: "jQuery cheatsheet and syntaxs.",
+    topic: "jQuery cheatsheet and syntax.",
     url: "https://htmlcheatsheet.com/jquery/",
     comments: "a great resource for using jQuery",
   },
