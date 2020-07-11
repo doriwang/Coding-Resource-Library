@@ -19,11 +19,9 @@ $("#search-topics").on("click", function () {
       },
     })
     .then((library) => {
-      console.log(library);
       // dori added code block starts here
       // if no results are pulled back, displayPostMethod()
       if (library.length === 0) {
-        console.log("test");
         displayPostMethod();
       }
       // dori added code block end here
@@ -32,7 +30,7 @@ $("#search-topics").on("click", function () {
       $("#libraryEntries").empty();
 
       library.forEach((entry) => {
-
+        console.log(entry.id)
         var entryCol = $("<div>").addClass(
           "card index-card col-sm-12 col-lg-6"
         );
@@ -44,9 +42,15 @@ $("#search-topics").on("click", function () {
           .attr("target", "_blank")
           .text("Click Here to View Resource");
 
-        $("#libraryEntries").append(
-          entryCol.prepend(category, topic, comments, url)
-        );
+        var btnDiv = $("<div>").addClass("btnDiv")
+
+        var updateBtn = $("<button>").addClass(" btn btn-primary btn-sm updateBtn").text("Update Resource").attr("data-toggle", "modal").attr("data-target", "#myModal").attr("style", "margin-right: 10px")
+        var deleteBtn = $("<button>").addClass("btn btn-primary btn-sm deleteBtn").text("Delete Resource")
+
+        btnDiv.append(updateBtn, deleteBtn)
+        entryCol.prepend(category, topic, comments, url, btnDiv)
+
+        $("#libraryEntries").append(entryCol);
       });
     })
     .catch((err) => console.log(err));
@@ -58,9 +62,5 @@ function displayPostMethod() {
   var no = $("<a>").addClass("no").attr("href", "/").text(" / " + "No");
   var addNewMsg = $("<p>").text("Topic doesn't exist yet. Would you like to create a new one?").attr("style", "margin-left: -15px; margin-top: 20px; margin-bottom: 0px");
   $(".container-main").append(addNewMsg, yes, no)
-
-  $(".yes").on("click", function () {
-
-  })
 }
 // dori added code block end here

@@ -61,8 +61,15 @@ body {
 
 #search-topics,
 #search-categories,
-#add-todo-btn {
+#add-todo-btn,
+.updateBtn,
+.deleteBtn {
     background-color: dodgerblue;
+}
+
+.btnDiv {
+    display: inline-block;
+    margin-top: 10px
 }
 
 /* todo page style */

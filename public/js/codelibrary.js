@@ -6,16 +6,16 @@ $(function () {
 
   const createEntry = (entry) => {
     $.ajax({
-      method: "POST",
-      url: "/codeLibrary",
-      data: entry,
-    })
+        method: "POST",
+        url: "/codeLibrary",
+        data: entry,
+      })
       .then(() => {
         // Reset form inputs
-        $("#category").val("");
-        $("#topic").val("");
-        $("#url").val("");
-        $("#comments").val("");
+        $("#enter-newtopic").val("");
+        $("#select-categories").val("");
+        $("#enter-newURL").val("");
+        $("#enter-newComment").val("");
 
         // Navigate to index page with all library entries
         window.location.href = "/";
@@ -24,23 +24,23 @@ $(function () {
   };
 
   // Handles event change for category input
-  $("#category").on("change", (event) => {
-    // destructure event
-    category = event.target.value;
-  });
-
-  // Handles event change for topic input
-  $("#topic").on("change", (event) => {
+  $("#enter-newtopic").on("change", (event) => {
     // destructure event
     topic = event.target.value;
   });
+
+  // Handles event change for topic input
+  $("#select-categories").on("change", (event) => {
+    // destructure event
+    category = event.target.value;
+  });
   // Handles event change for URL input
-  $("#url").on("change", (event) => {
+  $("#enter-newURL").on("change", (event) => {
     // destructure event
     url = event.target.value;
   });
   // Handles event change for comments input
-  $("#comments").on("change", (event) => {
+  $("#enter-newComment").on("change", (event) => {
     // destructure event
     comments = event.target.value;
   });
@@ -52,8 +52,8 @@ $(function () {
 
     // Stores all data entries into an object
     const entry = {
-      category: category,
       topic: topic,
+      category: category,
       url: url,
       comments: comments,
     };
@@ -64,9 +64,9 @@ $(function () {
 
   const getLibrary = () => {
     $.ajax({
-      method: "GET",
-      url: "/codeLibrary",
-    })
+        method: "GET",
+        url: "/codeLibrary",
+      })
       .then((library) => {
         library.forEach((entry) => {
           var entryCol = $("<div>").addClass(
@@ -80,9 +80,15 @@ $(function () {
             .attr("target", "_blank")
             .text("Click Here to View Resource");
 
-          $("#libraryEntries").append(
-            entryCol.prepend(category, topic, comments, url)
-          );
+          var btnDiv = $("<div>").addClass("btnDiv")
+
+          var updateBtn = $("<button>").addClass(" btn btn-primary btn-sm updateBtn").text("Update Resource").attr("data-toggle", "modal").attr("data-target", "#myModal").attr("style", "margin-right: 10px")
+          var deleteBtn = $("<button>").addClass("btn btn-primary btn-sm deleteBtn").text("Delete Resource")
+
+          btnDiv.append(updateBtn, deleteBtn)
+          entryCol.prepend(category, topic, comments, url, btnDiv)
+
+          $("#libraryEntries").append(entryCol);
         });
       })
       .catch((err) => console.log(err));
@@ -99,10 +105,12 @@ $(function () {
   $("#search-categories").on("click", (event) => {
     const getCategory = (category) => {
       $.ajax({
-        method: "GET",
-        url: "/category",
-        data: { category: category },
-      })
+          method: "GET",
+          url: "/category",
+          data: {
+            category: category
+          },
+        })
         .then((library) => {
           $("#libraryEntries").empty();
 
@@ -118,9 +126,15 @@ $(function () {
               .attr("target", "_blank")
               .text("Click Here to View Resource");
 
-            $("#libraryEntries").append(
-              entryCol.prepend(category, topic, comments, url)
-            );
+            var btnDiv = $("<div>").addClass("btnDiv")
+
+            var updateBtn = $("<button>").addClass(" btn btn-primary btn-sm updateBtn").text("Update Resource").attr("data-toggle", "modal").attr("data-target", "#myModal").attr("style", "margin-right: 10px")
+            var deleteBtn = $("<button>").addClass("btn btn-primary btn-sm deleteBtn").text("Delete Resource")
+
+            btnDiv.append(updateBtn, deleteBtn)
+            entryCol.prepend(category, topic, comments, url, btnDiv)
+
+            $("#libraryEntries").append(entryCol);
           });
         })
         .catch((err) => console.log(err));
