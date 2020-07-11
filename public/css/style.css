@@ -10,7 +10,7 @@ body {
 }
 
 .main-body {
-    background: linear-gradient(deepskyblue, aliceblue);
+    background: linear-gradient(deepskyblue, white);
     background-repeat: no-repeat;
     background-size: cover;
     margin-bottom: 60px;
@@ -25,11 +25,6 @@ body {
 .search-row {
     margin-bottom: 20px
 }
-
-/* .nav-main {
-    height: 100px;
-    background-image: linear-gradient(to right, lightskyblue, palegreen, orange, plum);
-} */
 
 .navbar-icons {
     display: inline-block;
