@@ -4,6 +4,7 @@
 // the server then performs the search to grab that topics from the Database.
 
 // when user hits the search-btn
+
 $("#search-topics").on("click", function () {
   // save the topic they typed into the topics input
   var topic = $("#enter-topics").val().trim().toLowerCase();
@@ -11,15 +12,27 @@ $("#search-topics").on("click", function () {
   console.log(topic);
   // run an AJAX GET-request for  servers api,
   $.ajax({
-    method: "GET",
-    url: "/codeLibrary/topics/",
-    data: { topic: topic },
-  })
+      method: "GET",
+      url: "/codeLibrary/topics/",
+      data: {
+        topic: topic
+      },
+    })
     .then((library) => {
+      console.log(library);
+      // dori added code block starts here
+      // if no results are pulled back, displayPostMethod()
+      if (library.length === 0) {
+        console.log("test");
+        displayPostMethod();
+      }
+      // dori added code block end here
+
       // reset the libraryEntries container
       $("#libraryEntries").empty();
 
       library.forEach((entry) => {
+
         var entryCol = $("<div>").addClass(
           "card index-card col-sm-12 col-lg-6"
         );
@@ -38,3 +51,16 @@ $("#search-topics").on("click", function () {
     })
     .catch((err) => console.log(err));
 });
+
+// dori added code block starts here
+function displayPostMethod() {
+  var yes = $("<a>").addClass("yes").attr("href", "/addnew").text("Yes").attr("style", "margin-left: -15px");
+  var no = $("<a>").addClass("no").attr("href", "/").text(" / " + "No");
+  var addNewMsg = $("<p>").text("Topic doesn't exist yet. Would you like to create a new one?").attr("style", "margin-left: -15px; margin-top: 20px; margin-bottom: 0px");
+  $(".container-main").append(addNewMsg, yes, no)
+
+  $(".yes").on("click", function () {
+
+  })
+}
+// dori added code block end here

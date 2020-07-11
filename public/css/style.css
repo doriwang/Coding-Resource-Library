@@ -10,7 +10,7 @@ body {
 }
 
 .main-body {
-    background: linear-gradient(deepskyblue, white);
+    background: linear-gradient(deepskyblue, aliceblue, white);
     background-repeat: no-repeat;
     background-size: cover;
     margin-bottom: 60px;
