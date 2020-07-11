@@ -5,9 +5,9 @@ var db = require("../models");
 var initialData = [
   {
     category: "CSS",
-    topic: "Different CSS colors",
+    topic: "CSS colors",
     url: "https://www.rapidtables.com/web/css/css-color.html#white",
-    comments: "a great resource for CSS colors",
+    comments: "A great resource referencing various CSS colors",
   },
   {
     category: "CSS",
@@ -20,13 +20,13 @@ var initialData = [
     topic: "What different CSS frameworks are out there?",
     url:
       "https://www.geeksforgeeks.org/10-best-css-frameworks-for-frontend-developers-in-2020/",
-    comments: "10 best CSS frameworks in 2020",
+    comments: "The ten best CSS frameworks in 2020",
   },
   {
     category: "CSS",
     topic: "What are different fonts to use in CSS?",
     url: "https://fonts.google.com/?preview.text_type=custom",
-    comments: "different fonts with google fonts",
+    comments: "Official Google Fonts page",
   },
   {
     category: "CSS",
@@ -38,7 +38,7 @@ var initialData = [
     category: "CSS",
     topic: "More free and beautiful icons",
     url: "https://icons8.com/icons",
-    comments: "a great icons recourse",
+    comments: "a great source of icons.",
   },
   {
     category: "CSS",
@@ -74,7 +74,7 @@ var initialData = [
     category: "JavaScript",
     topic: "A great JavaScript tutorial.",
     url: "https://www.w3schools.com/js/default.asp",
-    comments: "a great JavaScript tutorial",
+    comments: "a helpful JavaScript tutorial",
   },
   {
     category: "JavaScript",
@@ -147,7 +147,7 @@ var initialData = [
     topic: "6 different way to do AJAX calls.",
     url:
       "https://medium.com/@Sharad35386442/6-different-ways-to-do-ajax-calls-in-javascript-b47200fe7a38",
-    comments: "a great resource to do AJAX calls",
+    comments: "a great resource for using AJAX calls",
   },
   {
     category: "AJAX",
@@ -159,7 +159,7 @@ var initialData = [
     category: "MySQL",
     topic: "What are MySQL queries?",
     url: "https://devhints.io/mysql",
-    comments: "a great MySQL cheatsheet",
+    comments: "MySQL cheatsheet",
   },
   {
     category: "Express",
@@ -256,7 +256,7 @@ var initialData = [
     comments: "beginners guide to writing Jest Tests",
   },
   {
-    category: "Node.js",
+    category: "Node",
     topic: "fs readfile",
     url:
       "https://du.bootcampcontent.com/denver-coding-bootcamp/du-den-fsf-pt-03-2020-u-c/tree/master/Class-Content/09-NodeJS/01-Activities/05-Ins_readFile",
@@ -264,25 +264,25 @@ var initialData = [
       "fs is a Node standard library package for reading and writing files",
   },
   {
-    category: "Node.js",
+    category: "Node",
     topic: "fs writeFile",
     url:
       "https://du.bootcampcontent.com/denver-coding-bootcamp/du-den-fsf-pt-03-2020-u-c/tree/master/Class-Content/09-NodeJS/01-Activities/06-Ins_writeFile",
-    comments: "",
+    comments: "tutorial and exercise on the fs package and writeFile method.",
   },
   {
-    category: "Node.js",
+    category: "Node",
     topic: "fs appendFile",
     url:
       "https://du.bootcampcontent.com/denver-coding-bootcamp/du-den-fsf-pt-03-2020-u-c/tree/master/Class-Content/09-NodeJS/01-Activities/07-Stu_appendFile",
-    comments: "",
+    comments: "tutorial and exercise on the fs package and appendFile method.",
   },
   {
     category: "mysql",
     topic: "import csv file into mysql",
     url:
       "https://du.bootcampcontent.com/denver-coding-bootcamp/du-den-fsf-pt-03-2020-u-c/tree/master/Class-Content/12-MySQL/01-Activities/13-Top5000Code",
-    comments: "",
+    comments: "How to import a csv file into mysql",
   },
   {
     category: "MVC",
@@ -294,25 +294,99 @@ var initialData = [
   },
   {
     category: "MVC",
-    topic: "simple MVC exmple, day planner",
+    topic: "MVC",
     url:
       "https://du.bootcampcontent.com/denver-coding-bootcamp/du-den-fsf-pt-03-2020-u-c/tree/master/Class-Content/13-MVC/01-Activities/09-DayPlanner",
-    comments: "",
+    comments: "Example on how to use the MVC paradigm.",
   },
   {
-    category: "Node.js",
-    topic: "inquirer demo password",
+    category: "Node",
+    topic: "inquirer password",
     url:
       "https://du.bootcampcontent.com/denver-coding-bootcamp/du-den-fsf-pt-03-2020-u-c/tree/master/Class-Content/09-NodeJS/01-Activities/14-Ins_Inquirer-Demo",
-    comments: "",
+    comments: "Demo on creating password in inquirer.",
   },
   {
-    category: "Node.js",
+    category: "Node",
     topic: "inquirer, checkbox, list",
     url:
       "https://du.bootcampcontent.com/denver-coding-bootcamp/du-den-fsf-pt-03-2020-u-c/tree/master/Class-Content/09-NodeJS/01-Activities/15-Stu_Inquirer-Users",
+    comments: "How to use checkboxes and lists within the inquirer package.",
+  },
+  {
+    category: "Git",
+    topic: "Git and Github documentation on MDN",
+    url:
+      "https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/GitHub",
     comments:
-      "checkbox returned data is an array becuase checkbox is multi choises list returned data is a value",
+      "Contains basic information about Git and Github as well as links to guides and documentation.",
+  },
+  {
+    category: "Debugging",
+    topic: "W3 schools debugging, debuggers, and setting breakpoints",
+    url: "https://www.w3schools.com/js/js_debugging.asp",
+    comments:
+      "A helpful tutorial and information on the basics of debugging and preventing bugs in code.",
+  },
+  {
+    category: "Handlebars",
+    topic: "Handlebars documentation",
+    url: "https://devdocs.io/handlebars/",
+    comments: "The official documentation for Handlebars.",
+  },
+  {
+    category: "Heroku",
+    topic: "Heroku deployment",
+    url:
+      "https://medium.com/better-programming/deploy-your-app-for-free-in-7-easy-steps-thanks-to-heroku-dfd0f387edd0",
+    comments: "Article that breaks down deploying to Heroku in 7 easy steps.",
+  },
+  {
+    category: "Local Storage",
+    topic: "Local storage",
+    url:
+      "https://www.taniarascia.com/how-to-use-local-storage-with-javascript/",
+    comments:
+      "An easy to read article that goes step by step on how to make use of local storage.",
+  },
+  {
+    category: "Sequelize",
+    topic: "Sequelize ORM and model mapping",
+    url: "https://stackabuse.com/using-sequelize-orm-with-nodejs-and-express/",
+    comments:
+      "Article that explains how to install and use the Sequelize package.",
+  },
+  {
+    category: "Testing",
+    topic: "Testing with Jest",
+    url: "https://www.valentinog.com/blog/jest/",
+    comments: "Tutorial for beginners that want to write tests using Jest.",
+  },
+  {
+    category: "Handlebars",
+    topic: "Handlebars expressions, partials, and helpers",
+    url: "https://handlebarsjs.com/guide/builtin-helpers.html",
+    comments: "Entire website designed to explain handlebars syntax.",
+  },
+  {
+    category: "Git",
+    topic: "Git and Github",
+    url:
+      "https://developer.ibm.com/technologies/web-development/tutorials/d-learn-workings-git/",
+    comments: "An overview on how and why a team utilizes Git.",
+  },
+  {
+    category: "Sequelize",
+    topic: "Sequelize ORM",
+    url: "https://gist.github.com/zcaceres/742744b708393c022703b615d1bffbb1",
+    comments: "Step by step explanation of how Sequelize ORM works.",
+  },
+  {
+    category: "Local Storage",
+    topic: "Local storage",
+    url:
+      "https://du.bootcampcontent.com/denver-coding-bootcamp/du-den-fsf-pt-03-2020-u-c/tree/master/Class-Content/04-Web-APIs/01-Activities/23-Stu_Local-Storage-Objects/Solved",
+    comments: "Helpful class exercise on local storage.",
   },
 ];
 
