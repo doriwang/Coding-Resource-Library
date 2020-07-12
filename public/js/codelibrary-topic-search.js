@@ -6,6 +6,11 @@
 // when user hits the search-btn
 
 $("#search-topics").on("click", function () {
+  // dori starts
+  // reset div result
+  $("#newPostMsg").empty();
+  // dori ends here
+
   // save the topic they typed into the topics input
   var topic = $("#enter-topics").val().trim().toLowerCase();
 
@@ -30,7 +35,6 @@ $("#search-topics").on("click", function () {
       $("#libraryEntries").empty();
 
       library.forEach((entry) => {
-        console.log(entry.id)
         var entryCol = $("<div>").addClass(
           "card index-card col-sm-12 col-lg-6"
         );
@@ -58,9 +62,8 @@ $("#search-topics").on("click", function () {
 
 // dori added code block starts here
 function displayPostMethod() {
-  var yes = $("<a>").addClass("yes").attr("href", "/addnew").text("Yes").attr("style", "margin-left: -15px");
-  var no = $("<a>").addClass("no").attr("href", "/").text(" / " + "No");
-  var addNewMsg = $("<p>").text("Topic doesn't exist yet. Would you like to create a new one?").attr("style", "margin-left: -15px; margin-top: 20px; margin-bottom: 0px");
-  $(".container-main").append(addNewMsg, yes, no)
+  var yes = $("<a>").addClass("yes").attr("href", "/addnew").text("Yes").attr("style", "margin-top: 20px; margin-left: 10px");
+  var no = $("<a>").addClass("no").attr("href", "/").text("/ " + "No").attr("style", "margin-top: 20px; margin-left: 4px");
+  var addNewMsg = $("<p>").text("Topic doesn't exist yet. Would you like to create a new one?").attr("style", "margin-left: 0; margin-top: 20px; margin-bottom: 0px");
+  $("#newPostMsg").prepend(addNewMsg, yes, no)
 }
-// dori added code block end here

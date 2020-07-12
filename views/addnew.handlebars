@@ -1,9 +1,9 @@
-<form class="container">
+<form class="container container-addnew">
     <div class="form-group">
         <label>New Topic:</label>
         <input type="input" class="form-control" id="enter-newtopic">
     </div>
-    <div class="form-group">
+    <div class="form-group test">
         <label>Choose a Category or <a href="#" id="add-new">Add New</a>:</label>
         <select class="form-control" id="select-categories">
             <option></option>
@@ -40,6 +40,12 @@
     </div>
     <button type="submit" class="btn btn-primary" id="add-button">Add</button>
 </form>
+
+<div class="container">
+    <div class="row" id="successMsg"></div>
+    <div class="row" id="newPostEntry">
+    </div>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
