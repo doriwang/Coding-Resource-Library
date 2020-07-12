@@ -3,64 +3,105 @@
 // the application filter out the function words and punctuations, and then pass the filtered keywords  as a parameter
 // the server then performs the search to grab that topics from the Database.
 
-// when user hits the search-btn
+// var displayLibrary = require("./displayLibrary.js");
+import {displayLibrary, displayPostMethod} from "./js-modules/display.js"
 
-$("#search-topics").on("click", function () {
-  // save the topic they typed into the topics input
-  var topic = $("#enter-topics").val().trim().toLowerCase();
+$(function () {
+  // when user hits the search-btn
+  // handle search by topics
+  $("#search-topics").on("click", function () {
+    // reset the msg div and remove the previous message
+    $(".msg").empty();
+    console.log("searchbtn has been clicked");
 
-  console.log(topic);
-  // run an AJAX GET-request for  servers api,
-  $.ajax({
-      method: "GET",
-      url: "/codeLibrary/topics/",
-      data: {
-        topic: topic
-      },
-    })
-    .then((library) => {
-      // dori added code block starts here
-      // if no results are pulled back, displayPostMethod()
-      if (library.length === 0) {
-        displayPostMethod();
+    // save the topic they typed into the topics input
+    var topic = $("#enter-topics").val().trim().toLowerCase();
+
+    // console.log(topic);
+    // run an AJAX GET-request for  servers api,
+    $.ajax({
+        method: "GET",
+        url: "/codeLibrary/topics/",
+        data: {
+          topic: topic
+        },
+      })
+      .then((library) => {
+        // dori added code block starts here
+        // if no results are pulled back, displayPostMethod()
+        if (library.length === 0) {
+          displayPostMethod();
+        }
+        // dori added code block end here
+
+        displayLibrary(library);
+      })
+      .catch((err) => console.log(err));
+  });
+
+  // update the resource
+  $(".updateBtn").on("submit", function(event) {
+    event.preventDefault();
+    console.log("i am clicked")
+    const id = $(this).data("id");
+    console.log(id);
+    
+    // display the current content to the modal
+    $("#enter-newtopic").val($("#topic" + id).text());
+    $("#select-category").val($("#category" + id).text());
+    $("#enter-newURL").val("placeholder", "Please paste or input new URL");
+    $("enter-newComment").val($("#comments"+id).text());
+    
+    // click the "save changes" button
+    $("#update-button ").on("click", function(event) {
+      let category = $("#select-category").val();
+      let topic = $("#enter-newtopic").val();
+      let comment = $("enter-newComment").val();
+      let url = $("#enter-newURL").val();
+
+      if (url === "") {
+        const entry = {
+          topic: topic,
+          category: category,
+          comments: comments,
+        } 
+      } else {
+        const entry = {
+          topic: topic,
+          category: category,
+          url: url,
+          comments: comments,
+        } 
+
+        $.ajax({
+          method: "PUT",
+          url: "/codeLibrary/update/" + id,
+          data: entry,
+        })
+        .then(function() {
+          location.reload("/codeLibrary");
+        })
+
       }
-      // dori added code block end here
-
-      // reset the libraryEntries container
-      $("#libraryEntries").empty();
-
-      library.forEach((entry) => {
-        console.log(entry.id)
-        var entryCol = $("<div>").addClass(
-          "card index-card col-sm-12 col-lg-6"
-        );
-        var category = $("<p>").text("Category: " + entry.category);
-        var topic = $("<p>").text("Topic: " + entry.topic);
-        var comments = $("<p>").text("Comments: " + entry.comments);
-        var url = $("<a>")
-          .attr("href", entry.url)
-          .attr("target", "_blank")
-          .text("Click Here to View Resource");
-
-        var btnDiv = $("<div>").addClass("btnDiv")
-
-        var updateBtn = $("<button>").addClass(" btn btn-primary btn-sm updateBtn").text("Update Resource").attr("data-toggle", "modal").attr("data-target", "#myModal").attr("style", "margin-right: 10px")
-        var deleteBtn = $("<button>").addClass("btn btn-primary btn-sm deleteBtn").text("Delete Resource")
-
-        btnDiv.append(updateBtn, deleteBtn)
-        entryCol.prepend(category, topic, comments, url, btnDiv)
-
-        $("#libraryEntries").append(entryCol);
-      });
     })
-    .catch((err) => console.log(err));
-});
+  })
 
-// dori added code block starts here
-function displayPostMethod() {
-  var yes = $("<a>").addClass("yes").attr("href", "/addnew").text("Yes").attr("style", "margin-left: -15px");
-  var no = $("<a>").addClass("no").attr("href", "/").text(" / " + "No");
-  var addNewMsg = $("<p>").text("Topic doesn't exist yet. Would you like to create a new one?").attr("style", "margin-left: -15px; margin-top: 20px; margin-bottom: 0px");
-  $(".container-main").append(addNewMsg, yes, no)
-}
-// dori added code block end here
+
+
+  // delete the resource
+  $(".deleteBtn").on("submit", function(event) {
+    // event.preventDefault();
+    const id = $(this).data("id");
+
+    $.ajax({
+      method: "DELETE",
+      URL: "/codeLibrary/delete/" + id,
+    })
+    .then(function() {
+      location.reload("/codeLibrary");
+    })
+
+  })
+
+
+});
