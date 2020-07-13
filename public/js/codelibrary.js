@@ -1,4 +1,8 @@
-$(function () {
+// 🍏simon added starts here
+import {displayLibrary, displayPostMethod, } from "./js-modules/display.js"
+// simon added end
+
+$(document).ready(function() {
   let category = "";
   let topic = "";
   let url = "";
@@ -86,28 +90,9 @@ $(function () {
         url: "/codeLibrary",
       })
       .then((library) => {
-        library.forEach((entry) => {
-          var entryCol = $("<div>").addClass(
-            "card index-card col-sm-12 col-lg-6"
-          );
-          var category = $("<p>").text("Category: " + entry.category);
-          var topic = $("<p>").text("Topic: " + entry.topic);
-          var comments = $("<p>").text("Comments: " + entry.comments);
-          var url = $("<a>")
-            .attr("href", entry.url)
-            .attr("target", "_blank")
-            .text("Click Here to View Resource");
-
-          var btnDiv = $("<div>").addClass("btnDiv")
-
-          var updateBtn = $("<button>").addClass(" btn btn-primary btn-sm updateBtn").text("Update Resource").attr("data-toggle", "modal").attr("data-target", "#myModal").attr("style", "margin-right: 10px")
-          var deleteBtn = $("<button>").addClass("btn btn-primary btn-sm deleteBtn").text("Delete Resource")
-
-          btnDiv.append(updateBtn, deleteBtn)
-          entryCol.prepend(category, topic, comments, url, btnDiv)
-
-          $("#libraryEntries").append(entryCol);
-        });
+        // 🍏simon added starts here
+        displayLibrary(library);
+        // simon added ends here
       })
       .catch((err) => console.log(err));
   };
@@ -121,6 +106,12 @@ $(function () {
   });
   //On submit, the route sends category and returns all entries with specific category
   $("#search-categories").on("click", (event) => {
+
+  // simon added start here
+  // reset the msg div and remove the previous message
+  $(".msg").empty();
+  // simon added end
+
     const getCategory = (category) => {
       $.ajax({
           method: "GET",
@@ -130,30 +121,11 @@ $(function () {
           },
         })
         .then((library) => {
-          $("#libraryEntries").empty();
+        
+          // 🍏simon added starts here
+        displayLibrary(library);
+        // simon added ends here
 
-          library.forEach((entry) => {
-            var entryCol = $("<div>").addClass(
-              "card index-card col-sm-12 col-lg-6"
-            );
-            var category = $("<p>").text("Category: " + entry.category);
-            var topic = $("<p>").text("Topic: " + entry.topic);
-            var comments = $("<p>").text("Comments: " + entry.comments);
-            var url = $("<a>")
-              .attr("href", entry.url)
-              .attr("target", "_blank")
-              .text("Click Here to View Resource");
-
-            var btnDiv = $("<div>").addClass("btnDiv")
-
-            var updateBtn = $("<button>").addClass(" btn btn-primary btn-sm updateBtn").text("Update Resource").attr("data-toggle", "modal").attr("data-target", "#myModal").attr("style", "margin-right: 10px")
-            var deleteBtn = $("<button>").addClass("btn btn-primary btn-sm deleteBtn").text("Delete Resource")
-
-            btnDiv.append(updateBtn, deleteBtn)
-            entryCol.prepend(category, topic, comments, url, btnDiv)
-
-            $("#libraryEntries").append(entryCol);
-          });
         })
         .catch((err) => console.log(err));
     };

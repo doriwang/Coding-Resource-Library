@@ -20,7 +20,7 @@ function searchTopics(topic, cb) {
 
         var keyWords = clean(topic);
         console.log("key words: ", keyWords);
-        // build search array for Squelize Op.or to use
+        // build search array per Squelize syntax
         var searchArr = [];
         for (var i = 0; i < keyWords.length; i++) {
             var obj = {
@@ -29,6 +29,7 @@ function searchTopics(topic, cb) {
             searchArr.push(obj);
         }
 
+        // conduct first level query by using AND keywords (search by keyword1 and keyword2 and keyword3 ...)
         db.CodeResource.findAll({
             where: {
                 topic: {
@@ -36,10 +37,29 @@ function searchTopics(topic, cb) {
                 },
             },
         })
-        .then(function (result) {
-            cb(result);
+        .then(function (result_and) {
+            // if there is one and only one keyword, no need to do "query or" 
+            // if more than one keywords, do "query or" after "query and" (search by keyword1 or keyword2 or keyword3)
+            // conduct second level query by using Or keywords
+            if (searchArr.length > 1) {
+                db.CodeResource.findAll({
+                    where: {
+                        topic: {
+                            [Op.or]: searchArr
+                        },
+                    },
+                })
+                .then(function(result_or) {
+                    // merge the two result arrays together
+                    // the result or array will join the result and array at the end
+                    let result = result_and.concat(result_or)
+                    cb(result)
+                })
+            } else {
+                cb(result_and)
+            }
         });  
-    } // end of else
+    } // end of else at line 17
 }
 
 module.exports = searchTopics;
