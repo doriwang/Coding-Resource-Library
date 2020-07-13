@@ -60,7 +60,7 @@ var initialData = [
   },
   {
     category: "HTML",
-    topic: "A great Markup language validator.",
+    topic: "A great Markup language validator for HTML.",
     url: "https://validator.w3.org/",
     comments: "markup validation service",
   },
@@ -72,7 +72,7 @@ var initialData = [
   },
   {
     category: "JavaScript",
-    topic: "A great JavaScript tutorial.",
+    topic: "A useful JavaScript tutorial.",
     url: "https://www.w3schools.com/js/default.asp",
     comments: "a helpful JavaScript tutorial",
   },
@@ -113,7 +113,7 @@ var initialData = [
   },
   {
     category: "JavaScript",
-    topic: "Async Await",
+    topic: "Javascript Async Await",
     url:
       "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await",
     comments: "the basics of Async Await",
@@ -196,7 +196,7 @@ var initialData = [
   },
   {
     category: "JavaScript",
-    topic: "Events Event Handling",
+    topic: "Javascript Events Event Handling",
     url:
       "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events",
     comments: "MDN introduction to events and event handling",
@@ -257,7 +257,7 @@ var initialData = [
   },
   {
     category: "Node",
-    topic: "fs readfile",
+    topic: "Node fs readfile",
     url:
       "https://du.bootcampcontent.com/denver-coding-bootcamp/du-den-fsf-pt-03-2020-u-c/tree/master/Class-Content/09-NodeJS/01-Activities/05-Ins_readFile",
     comments:
@@ -265,14 +265,14 @@ var initialData = [
   },
   {
     category: "Node",
-    topic: "fs writeFile",
+    topic: "Node fs writeFile",
     url:
       "https://du.bootcampcontent.com/denver-coding-bootcamp/du-den-fsf-pt-03-2020-u-c/tree/master/Class-Content/09-NodeJS/01-Activities/06-Ins_writeFile",
     comments: "tutorial and exercise on the fs package and writeFile method.",
   },
   {
     category: "Node",
-    topic: "fs appendFile",
+    topic: "Node fs appendFile",
     url:
       "https://du.bootcampcontent.com/denver-coding-bootcamp/du-den-fsf-pt-03-2020-u-c/tree/master/Class-Content/09-NodeJS/01-Activities/07-Stu_appendFile",
     comments: "tutorial and exercise on the fs package and appendFile method.",
@@ -286,7 +286,7 @@ var initialData = [
   },
   {
     category: "MVC",
-    topic: "get multiple parameters from route",
+    topic: "Get multiple parameters from route using MVC paradigm",
     url:
       "https://du.bootcampcontent.com/denver-coding-bootcamp/du-den-fsf-pt-03-2020-u-c/tree/master/Class-Content/13-MVC/01-Activities/01-ExpressCalculator",
     comments:
@@ -301,21 +301,21 @@ var initialData = [
   },
   {
     category: "Node",
-    topic: "inquirer password",
+    topic: "node inquirer password",
     url:
       "https://du.bootcampcontent.com/denver-coding-bootcamp/du-den-fsf-pt-03-2020-u-c/tree/master/Class-Content/09-NodeJS/01-Activities/14-Ins_Inquirer-Demo",
     comments: "Demo on creating password in inquirer.",
   },
   {
     category: "Node",
-    topic: "inquirer, checkbox, list",
+    topic: "node inquirer, checkbox, list",
     url:
       "https://du.bootcampcontent.com/denver-coding-bootcamp/du-den-fsf-pt-03-2020-u-c/tree/master/Class-Content/09-NodeJS/01-Activities/15-Stu_Inquirer-Users",
     comments: "How to use checkboxes and lists within the inquirer package.",
   },
   {
     category: "Git",
-    topic: "Git and Github documentation on MDN",
+    topic: "Git documentation on MDN",
     url:
       "https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/GitHub",
     comments:
@@ -370,7 +370,7 @@ var initialData = [
   },
   {
     category: "Git",
-    topic: "Git and Github",
+    topic: "Git",
     url:
       "https://developer.ibm.com/technologies/web-development/tutorials/d-learn-workings-git/",
     comments: "An overview on how and why a team utilizes Git.",
