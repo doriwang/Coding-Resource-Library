@@ -48,6 +48,65 @@
     <section class="main-body">
         {{{ body }}}
     </section>
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Update Resource</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form class="container">
+                        <div class="form-group">
+                            <label>New Topic:</label>
+                            <input type="input" class="form-control" id="enter-newtopic">
+                        </div>
+                        <div class="form-group">
+                            <label>Choose a Category or <a href="#" id="add-new">Add New</a>:</label>
+                            <select class="form-control" id="select-categories">
+                                <option></option>
+                                <option>AJAX</option>
+                                <option>API</option>
+                                <option>CSS</option>
+                                <option>Debugging</option>
+                                <option>Express</option>
+                                <option>Git</option>
+                                <option>Handlebars</option>
+                                <option>Heroku</option>
+                                <option>HTML</option>
+                                <option>JavaScript</option>
+                                <option>jQuery</option>
+                                <option>Local Storage</option>
+                                <option>MVC</option>
+                                <option>MySQL</option>
+                                <option>Node</option>
+                                <option>Sequelize</option>
+                                <option>Testing</option>
+                            </select>
+                        </div>
+                        <div class="form-group add-newcategory" style="display:none">
+                            <label>New Category:</label>
+                            <input type="input" class="form-control" id="enter-newcategory">
+                        </div>
+                        <div class="form-group">
+                            <label>Source URL:</label>
+                            <input type="input" class="form-control" id="enter-newURL">
+                        </div>
+                        <div class="form-group">
+                            <label>Comment:</label>
+                            <input type="input" class="form-control" id="enter-newComment">
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="add-button">Save Changes</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="footer fixed-bottom">
         {{!-- <div class="card-footer fixed-bottom">
             <small class="text-muted">sticky footer</small>

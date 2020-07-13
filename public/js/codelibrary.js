@@ -22,7 +22,12 @@ $(document).ready(function() {
         $("#enter-newComment").val("");
 
         // Navigate to index page with all library entries
-        window.location.href = "/";
+        // window.location.href = "/";
+
+        // dori codes here 
+        // display the new entry
+        displayNewPostEntry(entry)
+        // dori codes end here
       })
       .catch((err) => console.log(err));
   };
@@ -38,6 +43,19 @@ $(document).ready(function() {
     // destructure event
     category = event.target.value;
   });
+
+  // dori codes here
+  // Handles event change for topic input
+  $("#enter-newcategory").on("change", (event) => {
+    // destructure event
+    category = event.target.value;
+    console.log(category)
+    var newCategory = new Option(category)
+    $("#select-categories").append(newCategory)
+    console.log(newCategory)
+  });
+  // dori codes end here
+
   // Handles event change for URL input
   $("#enter-newURL").on("change", (event) => {
     // destructure event
@@ -113,19 +131,32 @@ $(document).ready(function() {
     };
     getCategory(category);
   });
-
-    // update the resource
-    $(".updateBtn").on("submit", function(event) {
-      event.preventDefault();
-      console.log("i am clicked")
-      const id = $(this).data("id");
-      console.log(id);
-      $("#enter-newtopic").text($("#topic" + id).text());
-      $("#select-category").text($("#category" + id).text());
-      $("#enter-newURL").attr("placeholder", "Please paste or input new URL");
-      $("enter-newComment").text($("#comments"+id).text());
-    })
-  
-
-
 });
+
+// Dori codes here
+function displayNewPostEntry(entry) {
+  $(".container-addnew").attr("style", "display: none")
+  var successMsg = $("<P>").text("Successfully created new resource!").attr("style", "padding-top: 20px")
+  var entryCol = $("<div>").addClass(
+    "card index-card col-sm-12 col-lg-6"
+  );
+  var category = $("<p>").text("Category: " + entry.category);
+  var topic = $("<p>").text("Topic: " + entry.topic);
+  var comments = $("<p>").text("Comments: " + entry.comments);
+  var url = $("<a>")
+    .attr("href", entry.url)
+    .attr("target", "_blank")
+    .text("Click Here to View Resource");
+
+  var btnDiv = $("<div>").addClass("btnDiv")
+
+  var updateBtn = $("<button>").addClass(" btn btn-primary btn-sm updateBtn").text("Update Resource").attr("data-toggle", "modal").attr("data-target", "#myModal").attr("style", "margin-right: 10px")
+  var deleteBtn = $("<button>").addClass("btn btn-primary btn-sm deleteBtn").text("Delete Resource")
+
+  btnDiv.append(updateBtn, deleteBtn)
+  entryCol.prepend(category, topic, comments, url, btnDiv)
+
+  $("#newPostEntry").append(entryCol);
+  $("#successMsg").append(successMsg);
+}
+// Dori codes end here

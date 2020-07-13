@@ -9,36 +9,37 @@ import {displayLibrary, displayPostMethod} from "./js-modules/display.js"
 $(function () {
   // when user hits the search-btn
   // handle search by topics
-  $("#search-topics").on("click", function () {
-    // reset the msg div and remove the previous message
-    $(".msg").empty();
-    console.log("searchbtn has been clicked");
+$("#search-topics").on("click", function () {
+  // dori starts
+  // reset div result
+  $("#newPostMsg").empty();
+  // dori ends here
 
-    // save the topic they typed into the topics input
-    var topic = $("#enter-topics").val().trim().toLowerCase();
+  // save the topic they typed into the topics input
+  var topic = $("#enter-topics").val().trim().toLowerCase();
 
-    // console.log(topic);
-    // run an AJAX GET-request for  servers api,
-    $.ajax({
-        method: "GET",
-        url: "/codeLibrary/topics/",
-        data: {
-          topic: topic
-        },
-      })
-      .then((library) => {
-        // dori added code block starts here
-        // if no results are pulled back, displayPostMethod()
-        if (library.length === 0) {
-          displayPostMethod();
-        }
-        // dori added code block end here
-
-        displayLibrary(library);
+  console.log(topic);
+  // run an AJAX GET-request for  servers api,
+  $.ajax({
+      method: "GET",
+      url: "/codeLibrary/topics/",
+      data: {
+        topic: topic
+      },
+    })
+    .then((library) => {
+      // dori added code block starts here
+      // if no results are pulled back, displayPostMethod()
+      if (library.length === 0) {
+        displayPostMethod();
+      }
+      // dori added code block end here
+    
+    displayLibrary(library);
       })
       .catch((err) => console.log(err));
   });
-
+  
   // update the resource
   $(".updateBtn").on("submit", function(event) {
     event.preventDefault();
@@ -81,12 +82,9 @@ $(function () {
         .then(function() {
           location.reload("/codeLibrary");
         })
-
       }
     })
   })
-
-
 
   // delete the resource
   $(".deleteBtn").on("submit", function(event) {
@@ -100,8 +98,5 @@ $(function () {
     .then(function() {
       location.reload("/codeLibrary");
     })
-
   })
-
-
 });
