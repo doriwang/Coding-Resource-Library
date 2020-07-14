@@ -1,6 +1,7 @@
 var db = require("../models");
 const { Op } = require("sequelize");
 var clean = require("./clean.js");
+var highlight = require("./highlight.js")
 
 // sentence is what user input in the search inbox box. it is sent by req/request
 // cb is the callback function
@@ -46,9 +47,14 @@ function searchTopics(topic, cb) {
         // merge the two result arrays together
         // the result or array will join the result and array at the end
         let result = result_and.concat(result_or);
+        // call highlight function to handle keywords in topic string
+        result = highlight(result, keyWords);
         cb(result);
       });
     } else {
+      // if only one keyword, no need to do query or search
+      //  call highlight function to handle keywords in topic string
+      result = highlight(result_and, keyWords);
       cb(result_and);
     }
   });
