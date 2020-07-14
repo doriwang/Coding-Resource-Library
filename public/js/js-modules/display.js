@@ -2,6 +2,10 @@
 export function displayLibrary(library) {
   // reset the libraryEntries container
   $("#libraryEntries").empty();
+  // dori added here
+  $("#enter-topics").val("");
+  $("#select-categories").val("")
+  //dori ends here
 
   // for each records, set up the card display
   library.forEach((entry) => {
@@ -76,21 +80,18 @@ export function displayPostMethod() {
     .addClass("yes")
     .attr("href", "/addnew")
     .text("Yes")
-    .attr("style", "margin-left: -15px");
   var no = $("<a>")
     .addClass("no")
     .attr("href", "/")
     .text(" / " + "No");
   var addNewMsg = $("<p>")
     .text("Topic doesn't exist yet. Would you like to create a new one?")
-    .attr("style", "margin-left: -15px; margin-top: 20px; margin-bottom: 0px");
+    .attr("style", "margin-top: 20px; margin-bottom: 0px");
 
   // simon added a new div starts here
   var msgDiv = $("<div>").addClass("msg");
   msgDiv.append(addNewMsg, yes, no);
-  $(".container-main").append(msgDiv);
+  $("#newPostMsg").append(msgDiv);
   // simon added end
-
-  // $(".container-main").append(addNewMsg, yes, no)
 }
 // dori added code block end here

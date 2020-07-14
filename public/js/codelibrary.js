@@ -1,8 +1,11 @@
 // 🍏simon added starts here
-import {displayLibrary, displayPostMethod, } from "./js-modules/display.js"
+import {
+  displayLibrary,
+  displayPostMethod
+} from "./js-modules/display.js"
 // simon added end
 
-$(document).ready(function() {
+$(document).ready(function () {
   let category = "";
   let topic = "";
   let url = "";
@@ -49,10 +52,6 @@ $(document).ready(function() {
   $("#enter-newcategory").on("change", (event) => {
     // destructure event
     category = event.target.value;
-    console.log(category)
-    var newCategory = new Option(category)
-    $("#select-categories").append(newCategory)
-    console.log(newCategory)
   });
   // dori codes end here
 
@@ -80,7 +79,18 @@ $(document).ready(function() {
       comments: comments,
     };
 
+    // dori added here
+    console.log(entry)
+    console.log(category, typeof category)
+    // var newCategory = new Option(category);
+    // $("#select-categories").append(newCategory)
+    var newCategory = "<option>" + category + "</option>"
+    // $("#select-categories").html(newCategory)
+    $(".test #select-categories").append(newCategory)
+    // console.log(newCategory, typeof newCategory, typeof $("#select-categories:first-child"))
     // Creates library entry
+    //dori ends here
+
     createEntry(entry);
   });
 
@@ -107,10 +117,10 @@ $(document).ready(function() {
   //On submit, the route sends category and returns all entries with specific category
   $("#search-categories").on("click", (event) => {
 
-  // simon added start here
-  // reset the msg div and remove the previous message
-  $(".msg").empty();
-  // simon added end
+    // simon added start here
+    // reset the msg div and remove the previous message
+    $(".msg").empty();
+    // simon added end
 
     const getCategory = (category) => {
       $.ajax({
@@ -121,10 +131,10 @@ $(document).ready(function() {
           },
         })
         .then((library) => {
-        
+
           // 🍏simon added starts here
-        displayLibrary(library);
-        // simon added ends here
+          displayLibrary(library);
+          // simon added ends here
 
         })
         .catch((err) => console.log(err));
