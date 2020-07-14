@@ -34,7 +34,30 @@ module.exports = function (app) {
     console.log(newResource);
     //Create new resource in Code Library
     db.CodeResource.create({
-      ...newResource
+      ...newResource,
+    }).then(function (result) {
+      res.json(result);
+    });
+  });
+  app.put("/codeLibrary/update/:id", function (req, res) {
+    var changeResource = req.body;
+    console.log("44", req.body);
+
+    db.CodeResource.update(changeResource, {
+      where: {
+        id: req.params.id,
+      },
+    }).then(function (result) {
+      res.json(result);
+    });
+  });
+
+  app.delete("/codeLibrary/delete/:id", function (req, res) {
+    console.log(req.params.id);
+    db.CodeResource.destroy({
+      where: {
+        id: req.params.id,
+      },
     }).then(function (result) {
       res.json(result);
     });
