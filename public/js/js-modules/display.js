@@ -2,76 +2,45 @@
 export function displayLibrary(library) {
   // reset the libraryEntries container
   $("#libraryEntries").empty();
-  // dori added here
-  $("#enter-topics").val("");
-  $("#select-categories").val("")
-  //dori ends here
 
   // for each records, set up the card display
   library.forEach((entry) => {
-    //splits array depending on where user input matches topic word
-    var userInput = $("#enter-topics").val().trim().toLowerCase();
-    var lower1 = userInput.toLowerCase();
-    var lower2 = entry.topic.toLowerCase();
-    var splitString = lower2.split(lower1);
-    console.log(splitString);
-
-    var afterHighlight = $("<span>").text(splitString[1]);
-
-    var highlight = $("<span>")
-      .text(lower1.toUpperCase())
-      .attr("style", "background-color:yellow");
-
-    //Jon code ends here
     // console.log(entry.id)
     var entryCol = $("<div>").addClass("card index-card col-sm-12 col-lg-6");
-    var category = $("<p>")
-      .text("Category: " + entry.category)
-      .attr("id", "category" + entry.id);
-    var topic = $("<p>")
-      .text("Topic: " + splitString[0])
-      .attr("id", "topic" + entry.id);
-    //Jon added two appended span tags
-    topic.append(highlight, afterHighlight);
-
-    var comments = $("<p>")
-      .text("Comments: " + entry.comments)
-      .attr("id", "comments" + entry.id);
+    var category = $("<p>").text("Category: " + entry.category).attr("id", "category" + entry.id);
+    // var topic = document.getElementsByTagName("p")
+    // topic.innerHTML = entry.topic;
+    var topic = $(`<p>Topic:  ${ entry.topic}</p>`).attr("id", "topic" + entry.id);
+    var comments = $("<p>").text("Comments: " + entry.comments).attr("id", "comments" + entry.id);
     var url = $("<a>")
       .attr("href", entry.url)
       .attr("target", "_blank")
       .text("Click Here to View Resource");
 
-    var btnDiv = $("<div>").addClass("btnDiv");
+    var btnDiv = $("<div>").addClass("btnDiv")
 
     // var updateBtn = $("<button>").addClass(" btn btn-primary btn-sm updateBtn").text("Update Resource").attr("style", "margin-right: 10px");
 
-    var updateBtn = $("<button>")
-      .addClass(" btn btn-primary btn-sm updateBtn")
-      .text("Update Resource")
-      .attr("data-toggle", "modal")
-      .attr("data-target", "#myModal")
-      .attr("style", "margin-right: 10px");
-    var deleteBtn = $("<button>")
-      .addClass("btn btn-primary btn-sm deleteBtn")
-      .text("Delete Resource");
+    var updateBtn = $("<button>").addClass(" btn btn-primary btn-sm updateBtn").text("Update Resource").attr("data-toggle", "modal").attr("data-target", "#myModal").attr("style", "margin-right: 10px")
+    var deleteBtn = $("<button>").addClass("btn btn-primary btn-sm deleteBtn").text("Delete Resource")
 
     // simon added starts here
     updateBtn.attr("data-id", entry.id).attr("type", "submit");
     deleteBtn.attr("data-id", entry.id);
     $("#libraryEntries").attr("data-id", entry.id);
 
-    updateBtn.attr("onClick", function (event) {
-      const id = $(this).data("id");
-      console.log(id);
-    });
+    // updateBtn.attr("onClick", function(event) {
+    //     const id = $(this).data("id");
+    //     console.log(id);
+    // })
     // simon added ends
 
-    btnDiv.append(updateBtn, deleteBtn);
-    entryCol.prepend(category, topic, comments, url, btnDiv);
+    btnDiv.append(updateBtn, deleteBtn)
+    entryCol.prepend(category, topic, comments, url, btnDiv)
 
     $("#libraryEntries").append(entryCol);
   });
+
 }
 
 // dori added code block starts here
