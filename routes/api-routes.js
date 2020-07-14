@@ -30,10 +30,12 @@ module.exports = function (app) {
   //Establish a POST route
   app.post("/codeLibrary", function (req, res) {
     // Store body of request in a variable
-    var newResource = req.query.data;
+    var newResource = req.body;
     console.log(newResource);
     //Create new resource in Code Library
-    db.CodeResource.create(newResource).then(function (result) {
+    db.CodeResource.create({
+      ...newResource
+    }).then(function (result) {
       res.json(result);
     });
   });
