@@ -51,51 +51,48 @@ $(function () {
     console.log(id);
 
     // display the current content to the modal
-    $("#enter-newtopic").val($("#topic" + id).text());
-    $("#select-category").val($("#category" + id).text());
-    $("#enter-newURL").val("Please paste or input new URL");
-    $("#enter-newComment").val($("#comments" + id).text());
+    // $("#enter-newtopic").val(
+    //   $("#topic" + id)
+    //     .text()
+    //     .replace("Topic", "")
+    // );
+    // $("#select-category").val($("#category" + id).text());
+    // $("#enter-newURL").val("Please paste or input new URL");
+    // $("#enter-newComment").val($("#comments" + id).text());
 
     // click the "save changes" button
-    $("#update-button ").on("click", function (event) {
-      let category = $("#select-category").val();
+    $("#add-button").on("click", function (event) {
+      let category = $("#select-categories").val();
       let topic = $("#enter-newtopic").val();
-      let comment = $("enter-newComment").val();
+      let comments = $("#enter-newComment").val();
       let url = $("#enter-newURL").val();
+      console.log(category, comments);
+      console.log(id);
 
-      if (url === "") {
-        const entry = {
+      $.ajax({
+        method: "PUT",
+        url: "/codeLibrary/update/" + id,
+        data: {
           topic: topic,
           category: category,
           comments: comments,
-        };
-      } else {
-        const entry = {
-          topic: topic,
-          category: category,
           url: url,
-          comments: comments,
-        };
-
-        $.ajax({
-          method: "PUT",
-          url: "/codeLibrary/update/" + id,
-          data: entry,
-        }).then(function () {
-          location.reload("/codeLibrary");
-        });
-      }
+        },
+      }).then(function () {
+        location.reload("/codeLibrary");
+      });
     });
   });
 
   // delete the resource
-  $(".deleteBtn").on("submit", function (event) {
+  $(document).on("click", ".deleteBtn", function (event) {
     // event.preventDefault();
     const id = $(this).data("id");
+    console.log(id);
 
     $.ajax({
       method: "DELETE",
-      URL: "/codeLibrary/delete/" + id,
+      url: "/codeLibrary/delete/" + id,
     }).then(function () {
       location.reload("/codeLibrary");
     });
