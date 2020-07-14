@@ -3,6 +3,7 @@ import {
   displayLibrary,
   displayPostMethod
 } from "./js-modules/display.js"
+import { categoryList } from "./js-modules/categoryList.js";
 // simon added end
 
 $(document).ready(function () {
@@ -90,7 +91,8 @@ $(document).ready(function () {
     // console.log(newCategory, typeof newCategory, typeof $("#select-categories:first-child"))
     // Creates library entry
     //dori ends here
-
+    // simon added here
+    window.location.reload();
     createEntry(entry);
   });
 
@@ -102,6 +104,7 @@ $(document).ready(function () {
       .then((library) => {
         // 🍏simon added starts here
         displayLibrary(library);
+        categoryList(library);
         // simon added ends here
       })
       .catch((err) => console.log(err));
@@ -134,6 +137,7 @@ $(document).ready(function () {
 
           // 🍏simon added starts here
           displayLibrary(library);
+          // categoryList(library);
           // simon added ends here
 
         })
