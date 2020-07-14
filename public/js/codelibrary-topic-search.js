@@ -44,7 +44,7 @@ $(function () {
   });
 
   // update the resource
-  $(".updateBtn").on("submit", function (event) {
+  $(document).on("click", ".updateBtn", function (event) {
     event.preventDefault();
     console.log("i am clicked");
     const id = $(this).data("id");
@@ -53,8 +53,8 @@ $(function () {
     // display the current content to the modal
     $("#enter-newtopic").val($("#topic" + id).text());
     $("#select-category").val($("#category" + id).text());
-    $("#enter-newURL").val("placeholder", "Please paste or input new URL");
-    $("enter-newComment").val($("#comments" + id).text());
+    $("#enter-newURL").val("Please paste or input new URL");
+    $("#enter-newComment").val($("#comments" + id).text());
 
     // click the "save changes" button
     $("#update-button ").on("click", function (event) {
