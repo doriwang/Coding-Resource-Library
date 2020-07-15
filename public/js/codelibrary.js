@@ -1,13 +1,6 @@
-// 🍏simon added starts here
 import {
   displayLibrary
 } from "./js-modules/display.js"
-import {
-  categoryList
-} from "./js-modules/categoryList.js";
-// simon added end
-
-var categoryLib
 
 $(document).ready(function () {
   let category = "";
@@ -27,14 +20,6 @@ $(document).ready(function () {
         $("#select-categories").val("");
         $("#enter-newURL").val("");
         $("#enter-newComment").val("");
-
-        // Navigate to index page with all library entries
-        // window.location.href = "/";
-
-        // // dori codes here 
-        // // display the new entry
-        // displayNewPostEntry(entry)
-        // // dori codes end here
       })
       .catch((err) => console.log(err));
   };
@@ -46,7 +31,7 @@ $(document).ready(function () {
   });
 
   // Handles event change for topic input
-  $("#select-categories").on("change", (event) => {
+  $("#addnew-select-categories").on("change", (event) => {
     // destructure event
     category = event.target.value;
   });
@@ -66,7 +51,6 @@ $(document).ready(function () {
   $("form").on("submit", (event) => {
     // prevent default
     event.preventDefault();
-
     // Stores all data entries into an object
     const entry = {
       topic: topic,
@@ -88,10 +72,8 @@ $(document).ready(function () {
         url: "/codeLibrary",
       })
       .then((library) => {
-        categoryLib = library
         // 🍏simon added starts here
         displayLibrary(library);
-        categoryList(library, "");
         // simon added ends here
       })
       .catch((err) => console.log(err));
@@ -100,9 +82,8 @@ $(document).ready(function () {
   // Gets all entries from library and displays to the page
   getLibrary();
 
-
   //Grabs the selection choice of user from category dropdown
-  $("#select-categories").on("change", (event) => {
+  $("#index-select-categories").on("change", (event) => {
     category = event.target.value;
   });
   //On submit, the route sends category and returns all entries with specific category
@@ -112,6 +93,7 @@ $(document).ready(function () {
     // reset the msg div and remove the previous message
     $(".msg").empty();
     // simon added end
+    $("#index-select-categories").empty();
 
     const getCategory = (category) => {
       $.ajax({
@@ -125,7 +107,6 @@ $(document).ready(function () {
 
           // 🍏simon added starts here
           displayLibrary(library);
-          // categoryList(library);
           // simon added ends here
 
         })
@@ -164,49 +145,49 @@ function displayNewPostEntry(entry) {
 // Dori codes end here
 
 // update the resource
-$(document).on("click", ".updateBtn", function (event) {
-  event.preventDefault();
-  const id = $(this).data("id");
+// $(document).on("click", ".updateBtn", function (event) {
+//   event.preventDefault();
+//   const id = $(this).data("id");
 
-  $("#myModal").find("select").attr("id", "select" + id).addClass("selectTags")
-  categoryList(categoryLib, id)
+//   $("#myModal").find("select").attr("id", "select" + id).addClass("selectTags")
+//   categoryList(categoryLib, id)
 
 
-  // display the current content to the modal
-  $("#enter-newtopic").val(
-    $("#topic" + id)
-      .text()
-      .replace("Topic: ", "")
-  );
+//   // display the current content to the modal
+//   $("#enter-newtopic").val(
+//     $("#topic" + id)
+//     .text()
+//     .replace("Topic: ", "")
+//   );
 
-      // the following 3 line copied from https://stackoverflow.com/questions/496052/jquery-setting-the-selected-value-of-a-select-control-via-its-text-description
-      $("#select" + id).filter(function() {
-        return $(this).text() == $("#category" + id).text().replace("Category: ", "")
-      }).prop("selected", true);
-  
-      $("#enter-newURL").val("Please paste or input new URL");
-      $("#enter-newComment").val($("#comments" + id).text().replace("Comments: ", ""));
-  
-  // click the "save changes" button
-  $("#saveChanges").on("click", function (event) {
-    let category = $("#select" + id).filter(function() {
-      return $(this).prop("selected") === true;
-    }).text();
-    let topic = $("#enter-newtopic").val();
-    let comments = $("#enter-newComment").val();
-    let url = $("#enter-newURL").val();
+//   // the following 3 line copied from https://stackoverflow.com/questions/496052/jquery-setting-the-selected-value-of-a-select-control-via-its-text-description
+//   $("#select" + id).filter(function () {
+//     return $(this).text() == $("#category" + id).text().replace("Category: ", "")
+//   }).prop("selected", true);
 
-    $.ajax({
-      method: "PUT",
-      url: "/codeLibrary/update/" + id,
-      data: {
-        topic: topic,
-        category: category,
-        comments: comments,
-        url: url,
-      },
-    }).then(function () {
-      location.reload("/codeLibrary");
-    });
-  });
-});
+//   $("#enter-newURL").val("Please paste or input new URL");
+//   $("#enter-newComment").val($("#comments" + id).text().replace("Comments: ", ""));
+
+//   // click the "save changes" button
+//   $("#saveChanges").on("click", function (event) {
+//     let category = $("#select" + id).filter(function () {
+//       return $(this).prop("selected") === true;
+//     }).text();
+//     let topic = $("#enter-newtopic").val();
+//     let comments = $("#enter-newComment").val();
+//     let url = $("#enter-newURL").val();
+
+//     $.ajax({
+//       method: "PUT",
+//       url: "/codeLibrary/update/" + id,
+//       data: {
+//         topic: topic,
+//         category: category,
+//         comments: comments,
+//         url: url,
+//       },
+//     }).then(function () {
+//       location.reload("/codeLibrary");
+//     });
+//   });
+// });

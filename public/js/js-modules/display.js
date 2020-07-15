@@ -1,10 +1,3 @@
-// dori codes here 
-// import categoryList
-import {
-  categoryList
-} from "./categoryList.js";
-// dori codes end here
-
 // build a function to display results from database
 export function displayLibrary(library) {
   // reset the libraryEntries container
@@ -15,8 +8,6 @@ export function displayLibrary(library) {
     // console.log(entry.id)
     var entryCol = $("<div>").addClass("card index-card col-sm-12 col-lg-6");
     var category = $("<p>").text("Category: " + entry.category).attr("id", "category" + entry.id);
-    // var topic = document.getElementsByTagName("p")
-    // topic.innerHTML = entry.topic;
     var topic = $(`<p>Topic:  ${ entry.topic}</p>`).attr("id", "topic" + entry.id);
     var comments = $("<p>").text("Comments: " + entry.comments).attr("id", "comments" + entry.id);
     var url = $("<a>")
@@ -26,8 +17,6 @@ export function displayLibrary(library) {
 
     var btnDiv = $("<div>").addClass("btnDiv")
 
-    // var updateBtn = $("<button>").addClass(" btn btn-primary btn-sm updateBtn").text("Update Resource").attr("style", "margin-right: 10px");
-
     var updateBtn = $("<button>").addClass(" btn btn-primary btn-sm updateBtn").text("Update Resource").attr("data-toggle", "modal").attr("data-target", "#myModal").attr("style", "margin-right: 10px")
     var deleteBtn = $("<button>").addClass("btn btn-primary btn-sm deleteBtn").text("Delete Resource")
 
@@ -36,30 +25,11 @@ export function displayLibrary(library) {
     deleteBtn.attr("data-id", entry.id);
     $("#libraryEntries").attr("data-id", entry.id);
 
-    // updateBtn.attr("onClick", function(event) {
-    //     const id = $(this).data("id");
-    //     console.log(id);
-    // })
-    // simon added ends
-
-    // dori codes here 
-
-
-    // $(document).on("click", ".updateBtn", function (event) {
-    //   event.preventDefault();
-
-    //   const id = $(this).data("id");
-    //   $("#myModal").find("select").attr("id", "select" + id)
-    //   categoryList(library, id)
-    // })
-    // dori codes end here
-
     btnDiv.append(updateBtn, deleteBtn)
     entryCol.prepend(category, topic, comments, url, btnDiv)
 
     $("#libraryEntries").append(entryCol);
   });
-
 }
 
 // dori added code block starts here
