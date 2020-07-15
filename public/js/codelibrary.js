@@ -1,10 +1,13 @@
 // 🍏simon added starts here
 import {
-  displayLibrary,
-  displayPostMethod
+  displayLibrary
 } from "./js-modules/display.js"
-import { categoryList } from "./js-modules/categoryList.js";
+import {
+  categoryList
+} from "./js-modules/categoryList.js";
 // simon added end
+
+var categoryLib
 
 $(document).ready(function () {
   let category = "";
@@ -28,10 +31,10 @@ $(document).ready(function () {
         // Navigate to index page with all library entries
         // window.location.href = "/";
 
-        // dori codes here 
-        // display the new entry
-        displayNewPostEntry(entry)
-        // dori codes end here
+        // // dori codes here 
+        // // display the new entry
+        // displayNewPostEntry(entry)
+        // // dori codes end here
       })
       .catch((err) => console.log(err));
   };
@@ -47,14 +50,6 @@ $(document).ready(function () {
     // destructure event
     category = event.target.value;
   });
-
-  // dori codes here
-  // Handles event change for topic input
-  $("#enter-newcategory").on("change", (event) => {
-    // destructure event
-    category = event.target.value;
-  });
-  // dori codes end here
 
   // Handles event change for URL input
   $("#enter-newURL").on("change", (event) => {
@@ -79,20 +74,11 @@ $(document).ready(function () {
       url: url,
       comments: comments,
     };
+    // dori codes here 
+    // display the new entry
+    displayNewPostEntry(entry)
+    // dori codes end here
 
-    // dori added here
-    console.log(entry)
-    console.log(category, typeof category)
-    // var newCategory = new Option(category);
-    // $("#select-categories").append(newCategory)
-    var newCategory = "<option>" + category + "</option>"
-    // $("#select-categories").html(newCategory)
-    $(".test #select-categories").append(newCategory)
-    // console.log(newCategory, typeof newCategory, typeof $("#select-categories:first-child"))
-    // Creates library entry
-    //dori ends here
-    // simon added here
-    window.location.reload();
     createEntry(entry);
   });
 
@@ -102,9 +88,10 @@ $(document).ready(function () {
         url: "/codeLibrary",
       })
       .then((library) => {
+        categoryLib = library
         // 🍏simon added starts here
         displayLibrary(library);
-        categoryList(library);
+        categoryList(library, "");
         // simon added ends here
       })
       .catch((err) => console.log(err));
@@ -112,6 +99,7 @@ $(document).ready(function () {
 
   // Gets all entries from library and displays to the page
   getLibrary();
+
 
   //Grabs the selection choice of user from category dropdown
   $("#select-categories").on("change", (event) => {
@@ -174,3 +162,48 @@ function displayNewPostEntry(entry) {
   $("#successMsg").append(successMsg);
 }
 // Dori codes end here
+
+// update the resource
+$(document).on("click", ".updateBtn", function (event) {
+  event.preventDefault();
+  console.log("i am clicked");
+  const id = $(this).data("id");
+  console.log(id);
+
+  $("#myModal").find("select").attr("id", "select" + id).addClass("selectTags")
+  categoryList(categoryLib, id)
+
+
+  // display the current content to the modal
+  // $("#enter-newtopic").val(
+  //   $("#topic" + id)
+  //     .text()
+  //     .replace("Topic", "")
+  // );
+  // $("#select-category").val($("#category" + id).text());
+  // $("#enter-newURL").val("Please paste or input new URL");
+  // $("#enter-newComment").val($("#comments" + id).text());
+
+  // click the "save changes" button
+  $("#saveChanges").on("click", function (event) {
+    let category = $("#select-categories").val();
+    let topic = $("#enter-newtopic").val();
+    let comments = $("#enter-newComment").val();
+    let url = $("#enter-newURL").val();
+    console.log(category, comments);
+    console.log(id);
+
+    $.ajax({
+      method: "PUT",
+      url: "/codeLibrary/update/" + id,
+      data: {
+        topic: topic,
+        category: category,
+        comments: comments,
+        url: url,
+      },
+    }).then(function () {
+      location.reload("/codeLibrary");
+    });
+  });
+});

@@ -10,8 +10,8 @@
         <div class="col-sm-12 col-lg-5">
             <div class="form-group dropdown">
                 <label>Sort by categories:</label>
-                 <select class="form-control" id="select-categories">
-                    
+                <select class="form-control" id="index-select-categories">
+
                     {{!--simon commented out starts
                     <option></option>
                     <option value="AJAX">AJAX</option>
@@ -32,8 +32,8 @@
                     <option value="Sequelize">Sequelize</option>
                     <option value="Testing">Testing</option>
                     simon commented out end --}}
-                    
-                </select> 
+
+                </select>
             </div>
             <button type="submit" class="btn btn-primary" id="search-categories">Search</button>
         </div>
@@ -51,10 +51,3 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
-<script>
-    $("#add-new").on("click", function (event) {
-        event.preventDefault();
-        $(".add-newcategory").show();
-        $(".dropdown").hide();
-    });
-</script>
