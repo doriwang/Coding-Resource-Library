@@ -17,7 +17,7 @@ $(function () {
     // dori starts
     // reset div result
     $("#newPostMsg").empty();
-    $("#index-select-categories").empty();
+    // $("#index-select-categories").empty();
     // dori ends here
 
     // save the topic they typed into the topics input

@@ -93,7 +93,7 @@ $(document).ready(function () {
     // reset the msg div and remove the previous message
     $(".msg").empty();
     // simon added end
-    $("#index-select-categories").empty();
+    $("#index-select-categories").val("");
 
     const getCategory = (category) => {
       $.ajax({
@@ -144,50 +144,35 @@ function displayNewPostEntry(entry) {
 }
 // Dori codes end here
 
-// update the resource
-// $(document).on("click", ".updateBtn", function (event) {
-//   event.preventDefault();
-//   const id = $(this).data("id");
+// dori codes here
+$(document).on("click", ".updateBtn", function (event) {
+  var id = $(this).data("id");
+  console.log("151 clicked", id)
 
-//   $("#myModal").find("select").attr("id", "select" + id).addClass("selectTags")
-//   categoryList(categoryLib, id)
+  $(document).on("click", "#saveChanges", function (event) {
+    event.preventDefault();
+    test()
+    console.log("clicked", id)
+    // Handles event change for category input
+    function test() {
+      var topic = $("#enter-newtopic").val()
+      var category = $("#modal-select-categories").val()
+      var url = $("#enter-newURL").val()
+      var comments = $("#enter-newComment").val()
 
-
-//   // display the current content to the modal
-//   $("#enter-newtopic").val(
-//     $("#topic" + id)
-//     .text()
-//     .replace("Topic: ", "")
-//   );
-
-//   // the following 3 line copied from https://stackoverflow.com/questions/496052/jquery-setting-the-selected-value-of-a-select-control-via-its-text-description
-//   $("#select" + id).filter(function () {
-//     return $(this).text() == $("#category" + id).text().replace("Category: ", "")
-//   }).prop("selected", true);
-
-//   $("#enter-newURL").val("Please paste or input new URL");
-//   $("#enter-newComment").val($("#comments" + id).text().replace("Comments: ", ""));
-
-//   // click the "save changes" button
-//   $("#saveChanges").on("click", function (event) {
-//     let category = $("#select" + id).filter(function () {
-//       return $(this).prop("selected") === true;
-//     }).text();
-//     let topic = $("#enter-newtopic").val();
-//     let comments = $("#enter-newComment").val();
-//     let url = $("#enter-newURL").val();
-
-//     $.ajax({
-//       method: "PUT",
-//       url: "/codeLibrary/update/" + id,
-//       data: {
-//         topic: topic,
-//         category: category,
-//         comments: comments,
-//         url: url,
-//       },
-//     }).then(function () {
-//       location.reload("/codeLibrary");
-//     });
-//   });
-// });
+      $.ajax({
+        method: "PUT",
+        url: "/codeLibrary/update/" + id,
+        data: {
+          topic: topic,
+          category: category,
+          comments: comments,
+          url: url,
+        },
+      }).then(function () {
+        location.reload("/codeLibrary")
+      });
+    }
+  })
+})
+// dori codes end here
