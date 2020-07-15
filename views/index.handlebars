@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="row search-row">
+        <div class="col-sm-12 col-lg-5">
+            <div class="form-group">
+                <label>Sort by topics:</label><br>
+                <input type="text" class="form-control-lg" id="enter-topics" style="width:445px; height:38px"></div>
+            <button type="submit" class="btn btn-primary" id="search-topics">Search</button>
+        </div>
+        <div class="col-sm-12 col-lg-2" style="text-align:center; padding-top:40px; padding-bottom:40px;">OR</div>
+        <div class="col-sm-12 col-lg-5">
+            <div class="form-group dropdown">
+                <label>Sort by categories:</label>
+                <select class="form-control" id="index-select-categories">
+                    <option></option>
+                    <option value="AJAX">AJAX</option>
+                    <option value="API">API</option>
+                    <option value="CSS">CSS</option>
+                    <option value="Debugging">Debugging</option>
+                    <option value="Express">Express</option>
+                    <option value="Git">Git</option>
+                    <option value="Handlebars">Handlebars</option>
+                    <option value="Heroku">Heroku</option>
+                    <option value="HTML">HTML</option>
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="jQuery">jQuery</option>
+                    <option value="Local Storage">Local Storage</option>
+                    <option value="MVC">MVC</option>
+                    <option value="MySQL">MySQL</option>
+                    <option value="Node">Node</option>
+                    <option value="Sequelize">Sequelize</option>
+                    <option value="Testing">Testing</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary" id="search-categories">Search</button>
+        </div>
+    </div>
+    <div class="container container-main">
+        <div class="row" id="libraryEntries">
+        </div>
+        <div class="row" id="newPostMsg">
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
