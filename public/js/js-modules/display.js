@@ -1,3 +1,10 @@
+// dori codes here 
+// import categoryList
+import {
+  categoryList
+} from "./categoryList.js";
+// dori codes end here
+
 // build a function to display results from database
 export function displayLibrary(library) {
   // reset the libraryEntries container
@@ -34,6 +41,18 @@ export function displayLibrary(library) {
     //     console.log(id);
     // })
     // simon added ends
+
+    // dori codes here 
+
+
+    // $(document).on("click", ".updateBtn", function (event) {
+    //   event.preventDefault();
+
+    //   const id = $(this).data("id");
+    //   $("#myModal").find("select").attr("id", "select" + id)
+    //   categoryList(library, id)
+    // })
+    // dori codes end here
 
     btnDiv.append(updateBtn, deleteBtn)
     entryCol.prepend(category, topic, comments, url, btnDiv)
