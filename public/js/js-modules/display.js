@@ -5,7 +5,6 @@ export function displayLibrary(library) {
 
   // for each records, set up the card display
   library.forEach((entry) => {
-    // console.log(entry.id)
     var entryCol = $("<div>").addClass("card index-card col-sm-12 col-lg-6");
     var category = $("<p>").text("Category: " + entry.category).attr("id", "category" + entry.id);
     var topic = $(`<p>Topic:  ${ entry.topic}</p>`).attr("id", "topic" + entry.id);
