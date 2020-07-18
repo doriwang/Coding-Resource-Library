@@ -48,7 +48,7 @@ $(function () {
   $(document).on("click", ".deleteBtn", function (event) {
     // event.preventDefault();
     const id = $(this).data("id");
-    console.log(id);
+    alert("Successfully deleted resource!")
 
     $.ajax({
       method: "DELETE",
