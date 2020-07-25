@@ -11,19 +11,12 @@ $(document).ready(function () {
   const createEntry = (entry) => {
     $.ajax({
         method: "POST",
-        url: "/codeLibrary",
+        url: "/codeLibrary/post",
         data: entry,
       })
       .then(function () {
-        // Reset form inputs
-        $("#enter-newtopic").val("");
-        $("#select-categories").val("");
-        $("#enter-newURL").val("");
-        $("#enter-newComment").val("");
-
         alert("Successfully created new resource!")
-
-        // location.reload("/codeLibrary");
+        window.location.replace("/")
       })
       .catch((err) => console.log(err));
   };
@@ -52,10 +45,8 @@ $(document).ready(function () {
   });
 
   // Handles the submit event
-  $("form").on("submit", (event) => {
-    // prevent default
-    event.preventDefault();
-
+  $(document).on("click", "#add-button", function (event) {
+    // event.preventDefault();
     // Stores all data entries into an object
     const entry = {
       topic: topic,
@@ -63,12 +54,8 @@ $(document).ready(function () {
       url: url,
       comments: comments,
     };
-    // dori codes here 
-    // display the new entry
-    // displayNewPostEntry(entry)
-    // dori codes end here
 
-    createEntry(entry);
+    createEntry(entry)
   });
 
   const getLibrary = () => {
@@ -121,37 +108,6 @@ $(document).ready(function () {
   });
 });
 
-// Dori codes here
-// function displayNewPostEntry(entry) {
-//   $(".container-addnew").attr("style", "display: none")
-//   var successMsg = $("<P>").text("Successfully created new resource!").attr("style", "padding-top: 20px")
-//   var entryCol = $("<div>").addClass(
-//     "card index-card col-sm-12 col-lg-6"
-//   );
-//   var category = $("<p>").text("Category: " + entry.category).attr("id", "category" + entry.id);
-//   var topic = $(`<p>Topic:  ${ entry.topic}</p>`).attr("id", "topic" + entry.id);
-//   var comments = $("<p>").text("Comments: " + entry.comments).attr("id", "comments" + entry.id);
-//   var url = $("<a>")
-//     .attr("href", entry.url)
-//     .attr("target", "_blank")
-//     .text("Click Here to View Resource");
-
-//   var btnDiv = $("<div>").addClass("btnDiv")
-
-//   var updateBtn = $("<button>").addClass(" btn btn-primary btn-sm updateBtn").text("Update Resource").attr("data-toggle", "modal").attr("data-target", "#myModal").attr("style", "margin-right: 10px")
-//   var deleteBtn = $("<button>").addClass("btn btn-primary btn-sm deleteBtn").text("Delete Resource")
-
-//   updateBtn.attr("data-id", entry.id).attr("type", "submit");
-//   deleteBtn.attr("data-id", entry.id);
-//   $("#libraryEntries").attr("data-id", entry.id);
-
-//   btnDiv.append(updateBtn, deleteBtn)
-//   entryCol.prepend(category, topic, comments, url, btnDiv)
-
-//   $("#newPostEntry").append(entryCol);
-//   $("#successMsg").append(successMsg);
-// }
-
 $(document).on("click", ".updateBtn", function (event) {
   event.preventDefault();
   var id = $(this).data("id");
@@ -198,4 +154,3 @@ function updateResource(id) {
     location.reload("/codeLibrary")
   });
 }
-// dori codes end here
