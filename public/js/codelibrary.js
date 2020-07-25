@@ -11,15 +11,12 @@ $(document).ready(function () {
   const createEntry = (entry) => {
     $.ajax({
         method: "POST",
-        url: "/codeLibrary",
+        url: "/codeLibrary/post",
         data: entry,
       })
-      .then(() => {
-        // Reset form inputs
-        $("#enter-newtopic").val("");
-        $("#select-categories").val("");
-        $("#enter-newURL").val("");
-        $("#enter-newComment").val("");
+      .then(function () {
+        alert("Successfully created new resource!")
+        window.location.replace("/")
       })
       .catch((err) => console.log(err));
   };
@@ -48,9 +45,8 @@ $(document).ready(function () {
   });
 
   // Handles the submit event
-  $("form").on("submit", (event) => {
-    // prevent default
-    event.preventDefault();
+  $(document).on("click", "#add-button", function (event) {
+    // event.preventDefault();
     // Stores all data entries into an object
     const entry = {
       topic: topic,
@@ -58,12 +54,8 @@ $(document).ready(function () {
       url: url,
       comments: comments,
     };
-    // dori codes here 
-    // display the new entry
-    displayNewPostEntry(entry)
-    // dori codes end here
 
-    createEntry(entry);
+    createEntry(entry)
   });
 
   const getLibrary = () => {
@@ -116,63 +108,49 @@ $(document).ready(function () {
   });
 });
 
-// Dori codes here
-function displayNewPostEntry(entry) {
-  $(".container-addnew").attr("style", "display: none")
-  var successMsg = $("<P>").text("Successfully created new resource!").attr("style", "padding-top: 20px")
-  var entryCol = $("<div>").addClass(
-    "card index-card col-sm-12 col-lg-6"
-  );
-  var category = $("<p>").text("Category: " + entry.category);
-  var topic = $("<p>").text("Topic: " + entry.topic);
-  var comments = $("<p>").text("Comments: " + entry.comments);
-  var url = $("<a>")
-    .attr("href", entry.url)
-    .attr("target", "_blank")
-    .text("Click Here to View Resource");
-
-  var btnDiv = $("<div>").addClass("btnDiv")
-
-  var updateBtn = $("<button>").addClass(" btn btn-primary btn-sm updateBtn").text("Update Resource").attr("data-toggle", "modal").attr("data-target", "#myModal").attr("style", "margin-right: 10px")
-  var deleteBtn = $("<button>").addClass("btn btn-primary btn-sm deleteBtn").text("Delete Resource")
-
-  btnDiv.append(updateBtn, deleteBtn)
-  entryCol.prepend(category, topic, comments, url, btnDiv)
-
-  $("#newPostEntry").append(entryCol);
-  $("#successMsg").append(successMsg);
-}
-// Dori codes end here
-
-// dori codes here
 $(document).on("click", ".updateBtn", function (event) {
+  event.preventDefault();
   var id = $(this).data("id");
-  console.log("151 clicked", id)
+  updateModalText(id)
 
   $(document).on("click", "#saveChanges", function (event) {
     event.preventDefault();
-    test()
-    console.log("clicked", id)
-    // Handles event change for category input
-    function test() {
-      var topic = $("#enter-newtopic").val()
-      var category = $("#modal-select-categories").val()
-      var url = $("#enter-newURL").val()
-      var comments = $("#enter-newComment").val()
-
-      $.ajax({
-        method: "PUT",
-        url: "/codeLibrary/update/" + id,
-        data: {
-          topic: topic,
-          category: category,
-          comments: comments,
-          url: url,
-        },
-      }).then(function () {
-        location.reload("/codeLibrary")
-      });
-    }
+    updateResource(id)
+    alert("Successfully updated resource!")
   })
 })
-// dori codes end here
+
+function updateModalText(id) {
+  $.ajax({
+    method: "GET",
+    url: "/findOne/" + id,
+    data: {
+      id: id
+    }
+  }).then(result => {
+    $("#enter-newtopic").val(result.topic)
+    $("#modal-select-categories").val(result.category)
+    $("#enter-newURL").val(result.url)
+    $("#enter-newComment").val(result.comments)
+  })
+}
+
+function updateResource(id) {
+  var topic = $("#enter-newtopic").val()
+  var category = $("#modal-select-categories").val()
+  var url = $("#enter-newURL").val()
+  var comments = $("#enter-newComment").val()
+
+  $.ajax({
+    method: "PUT",
+    url: "/codeLibrary/update/" + id,
+    data: {
+      topic: topic,
+      category: category,
+      comments: comments,
+      url: url,
+    },
+  }).then(function () {
+    location.reload("/codeLibrary")
+  });
+}

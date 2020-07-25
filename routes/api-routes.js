@@ -27,8 +27,22 @@ module.exports = function (app) {
     });
   });
 
+  // dori adds code here
+  // create a findOne query
+  app.get("/findOne/:id", function (req, res) {
+
+    db.CodeResource.findOne({
+      where: {
+        id: req.params.id
+      }
+    }).then(function (result) {
+      res.json(result)
+    })
+  })
+  // dori codes end here
+
   //Establish a POST route
-  app.post("/codeLibrary", function (req, res) {
+  app.post("/codeLibrary/post", function (req, res) {
     // Store body of request in a variable
     var newResource = req.body;
     console.log(newResource);

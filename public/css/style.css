@@ -59,6 +59,10 @@ body {
     border-image-slice: 1;
 }
 
+.index-card:hover {
+    transform: scale(0.95)
+}
+
 #search-topics,
 #search-categories,
 #add-todo-btn,
